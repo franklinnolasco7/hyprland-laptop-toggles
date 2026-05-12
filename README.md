@@ -1,6 +1,9 @@
 ### Keyboard Toggle
 
-Disables/enables the built-in laptop keyboard dynamically using Hyprland's Lua eval.
+Disables/enables the built-in laptop keyboard dynamically using Hyprland's Lua eval. This is helpful when I place my external keyboard on my laptop so it wont randomly press keys.
+
+<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/e81398c7-4b82-4f36-8ae4-e9ed0d261b3c" />
+<br></br>
 
 **Installation:**
 
