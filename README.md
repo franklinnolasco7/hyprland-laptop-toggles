@@ -17,7 +17,7 @@ chmod +x ~/.local/bin/toggle-laptop-kb.sh
 **Config (`~/.config/hypr/hyprland.conf`):**
 
 ```conf
-bind = $mainMod CTRL, F12, exec, ~/.local/bin/toggle-laptop-kb.sh
+hl.bind(mainMod .. " + CTRL + F12", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.local/bin/toggle-laptop-kb.sh"))
 ```
 
 ### Touchpad Toggle
@@ -36,7 +36,7 @@ chmod +x ~/.local/bin/toggle-laptop-tp.sh
 **Config (`~/.config/hypr/hyprland.conf`):**
 
 ```conf
-bind = $mainMod CTRL, F11, exec, ~/.local/bin/toggle-laptop-tp.sh
+hl.bind(mainMod .. " + CTRL + F11", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.local/bin/toggle-laptop-tp.sh"))
 ```
 
 ## Finding Your Device Names
