@@ -1,20 +1,42 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-STATE_FILE="/tmp/laptop_kb_state"
+STATE_FILE="${XDG_RUNTIME_DIR:-/tmp}/laptop_kb_state"
 
-if [ ! -f "$STATE_FILE" ]; then
-    echo "true" > "$STATE_FILE"
-fi
+is_disabled() {
+    [[ -f "$STATE_FILE" ]] && [[ "$(cat "$STATE_FILE")" == "true" ]]
+}
 
-CURRENT=$(cat "$STATE_FILE")
+apply() {
+    local target="$1"
+    local current
+    is_disabled && current="true" || current="false"
 
-if [ "$CURRENT" = "true" ]; then
-    NEW_STATE="false"
-    notify-send "Laptop keyboard disabled"
-else
-    NEW_STATE="true"
-    notify-send "Laptop keyboard enabled"
-fi
+    [[ "$target" == "$current" ]] && return
 
-echo "$NEW_STATE" > "$STATE_FILE"
-hyprctl keyword '$LAPTOP_KB_ENABLED' "$NEW_STATE" -r
+    echo "$target" > "$STATE_FILE"
+
+    if [[ "$target" == "true" ]]; then
+        hyprctl eval 'hl.device({ name = "at-translated-set-2-keyboard", enabled = false })'
+        notify-send -i "input-keyboard-symbolic" "Built-in Keyboard" \
+            "<span color='#f38ba8'>[DISABLED]</span>"
+    else
+        hyprctl eval 'hl.device({ name = "at-translated-set-2-keyboard", enabled = true })'
+        notify-send -i "input-keyboard-symbolic" "Built-in Keyboard" \
+            "<span color='#a6e3a1'>[ENABLED]</span>"
+    fi
+}
+
+case "${1:-toggle}" in
+    status)
+        is_disabled && echo "true" || echo "false"
+        ;;
+    apply)
+        case "$2" in
+            true|false) apply "$2" ;;
+            *) is_disabled && apply "false" || apply "true" ;;
+        esac
+        ;;
+    *)
+        is_disabled && apply "false" || apply "true"
+        ;;
+esac

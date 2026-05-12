@@ -1,55 +1,44 @@
 ### Keyboard Toggle
-Disables/enables the built-in laptop keyboard.
+
+Disables/enables the built-in laptop keyboard dynamically using Hyprland's Lua eval.
 
 **Installation:**
+
 ```bash
-cp scripts/toggle-laptop-kb.sh ~/.local/bin/
+cp toggle-laptop-kb.sh ~/.local/bin/
 chmod +x ~/.local/bin/toggle-laptop-kb.sh
 ```
 
+**Note:** You must edit `~/.local/bin/toggle-laptop-kb.sh` and change `at-translated-set-2-keyboard` to your actual keyboard device name (find it with `hyprctl devices`).
+
 **Config (`~/.config/hypr/hyprland.conf`):**
+
 ```conf
-$LAPTOP_KB_ENABLED = true
-
-device {
-    name = at-translated-set-2-keyboard  # This is MY device name - find yours with: hyprctl devices
-    enabled = $LAPTOP_KB_ENABLED
-}
-
 bind = $mainMod CTRL, F12, exec, ~/.local/bin/toggle-laptop-kb.sh
 ```
 
 ### Touchpad Toggle
-Disables/enables the built-in touchpad.
+
+Disables/enables the built-in touchpad dynamically using Hyprland's Lua eval.
 
 **Installation:**
+
 ```bash
-cp scripts/toggle-laptop-tp.sh ~/.local/bin/
+cp toggle-laptop-tp.sh ~/.local/bin/
 chmod +x ~/.local/bin/toggle-laptop-tp.sh
 ```
 
+**Note:** You must edit `~/.local/bin/toggle-laptop-tp.sh` and change `elan050a:00-04f3:3158-touchpad` to your actual touchpad device name (find it with `hyprctl devices`).
+
 **Config (`~/.config/hypr/hyprland.conf`):**
+
 ```conf
-$LAPTOP_TP_ENABLED = true
-
-device {
-    name = your-touchpad-name-here  # Find yours with: hyprctl devices
-    enabled = $LAPTOP_TP_ENABLED
-}
-
 bind = $mainMod CTRL, F11, exec, ~/.local/bin/toggle-laptop-tp.sh
 ```
 
 ## Finding Your Device Names
 
 Run `hyprctl devices` to find your specific keyboard and touchpad names.
-
-## Reload Hyprland
-
-After editing config:
-```bash
-hyprctl reload
-```
 
 ## My Keybinds
 
