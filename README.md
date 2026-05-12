@@ -2,7 +2,7 @@
 
 Disables/enables the built-in laptop keyboard dynamically using Hyprland's Lua eval. This is helpful when I place my external keyboard on my laptop so it wont randomly press keys.
 
-<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/e81398c7-4b82-4f36-8ae4-e9ed0d261b3c" />
+<img width="2947" height="2311" alt="IMG_20260512_235459" src="https://github.com/user-attachments/assets/196b5aaf-2612-4872-ad3e-7c489fc74b23" />
 <br></br>
 
 **Installation:**
